@@ -1,7 +1,7 @@
 ---
 name: butler-grabfood
 description: "Order food or drinks on GrabFood in the Grab phone app: find the shop, pick a branch that is delivering, build the basket, then hand checkout to butler-app-checkout."
-version: 1.0.0
+version: 1.0.1
 metadata: {"butler":{"moneyMoving":true,"keywords":["grabfood","grab food","order on grab","grab delivery","food delivery","order food","deliver food","bubble tea","order drinks","grab menu"],"requires":{"bins":["app-checkout"],"skills":["butler-app-checkout"]}}}
 ---
 
@@ -27,6 +27,10 @@ Not this skill: a Grab ride (GrabCar) or GrabMart — work those from
   plus the street address. A menu question needs only the shop and address.
 - **Grab is not always on the phone**: `start` may land on the home screen,
   and the app installs from the provider's library in about a minute.
+- **A kept phone may already be signed in**, Grab open, your last address
+  remembered — `screen` before signing in. After a kept phone comes back,
+  Grab may ask where you are once: pick Malaysia, then the city (Kuala Lumpur
+  is "Klang Valley").
 - **Grab's labels are plain text**, so `screen` and `tap` work throughout;
   you rarely need `do` here.
 
@@ -53,13 +57,27 @@ app-checkout tap --text "^DON.T ALLOW$"
    Notifications: `DON’T ALLOW` — a curly apostrophe, so match it with
    `"^DON.T ALLOW$"`. Then `screen`: the home screen shows
    "Search the Grab app" and the tiles Car, Food, Mart.
-3. [ADAPT] **Open Food and set the delivery address.** Tap `Food`. If the
-   address at the top is not your owner's, tap it and type theirs — the
-   phone's GPS is often only near it. Never scroll the feed looking for the
-   shop: it shows promotions, not every shop.
-4. [ADAPT] **Search the shop** with Food's search bar: its name, as your
-   owner said it. A chain shows one card with "See all N outlets" — tap
-   that, and read every branch's distance and state off the one list.
+3. [ADAPT] **Open Food and set the delivery address.** Tap `Food`; a deals
+   page may open first — `key back`. The address is the line under
+   `DELIVER NOW` at the top; not your owner's (it is often a shop near the
+   phone's GPS):
+   - tap that line — a sheet opens with `Delivery address`; it comes **last**
+     in `screen`, so read all of it;
+   - tap the address in the sheet — the `Deliver to` page opens;
+   - tap its search box at the top (it shows `Deliver to`, or your last
+     search), `type` your owner's address, and tap the matching result — an
+     address used before is often already listed under Recent or Suggested;
+   - Grab may then cover the page with "This address seems far away from your
+     current location" — not in `screen` (it lists only `Deliver to` and the
+     address): tap the dimmed page around `540 1300` to close it, or `shot`
+     to see.
+   The icon beside the address is Back, not the address. Never scroll the feed
+   looking for the shop: it shows promotions, not every shop.
+4. [ADAPT] **Search the shop** with Food's search bar
+   (`What shall we deliver?`): its name, as your owner said it. A chain shows
+   one card with "See all N outlets" — tap that, and read every branch's
+   distance and state off the one list. A result opens when you tap its whole
+   line: `tap --text "^Niko Neko Matcha - Damansara Heights"`.
 5. [ADAPT] **Pick the branch.** The nearest one that is delivering now.
    Skip a branch showing "Unavailable for now", "can't accept new orders
    for delivery now" or "Pickup only, as drivers are busy". The nearest is
@@ -67,17 +85,34 @@ app-checkout tap --text "^DON.T ALLOW$"
    with its delivery time ("From 52 mins"). Offer pickup only if they ask.
 6. [ADAPT] **Read the menu** off `screen`, `swipe up` for more, every price
    as printed with its currency. **A size can be its own item**: KOI lists
-   "M-Milk Tea" and "L-Yakult Green Tea" as separate lines. A menu question
-   ends here — `end` the phone, then send the menu.
-7. [ADAPT] **Build the basket**, one item at a time: tap the item, set each
-   option your owner asked for on its sheet (`screen` after each tap — sugar
-   and ice are usually separate groups), set the quantity, add it, and
-   `screen` to confirm the basket count. An option your owner gave that the
-   sheet doesn't offer: ask before choosing another.
+   "M-Milk Tea" and "L-Yakult Green Tea" as separate lines. **A drink can come
+   in grades**: Niko Neko has no plain "Matcha Latte" but AJISAI 2.0, KIYONE
+   and REN lattes at different prices — no exact match: offer what's there,
+   with prices, in one question; never pick a substitute. A menu question
+   ends here — `end` the phone, then send the menu. Swipe from mid-screen,
+   not the bottom edge: a floating "Translate to English" button sits there.
+   Opened anyway, "Translations powered by AI" covers the menu and is not in
+   `screen`: tap its "Got it" (about `906 1963`), or `shot` to see.
+7. [ADAPT] **Build the basket**, one item at a time: tap the item by its
+   exact name — no sheet opens: tap the green + beside it (`(icon) beside
+   "<price>"`). On the sheet, each option group says `Pick 1` until chosen and
+   `Completed` after; the option buttons themselves report no on/off, so tap
+   the option's name (`tap --text "^Ice$"`) and check its group turns
+   `Completed`. The last rows sit under the floating `Add to Basket` bar:
+   `swipe up` before tapping them. The bar shows the price ("Add to Basket -
+   22.00"): a price you didn't expect means an extra was ticked — check before
+   adding. Set the quantity, add it, and `screen` to confirm the basket count.
+   An option your owner gave that the sheet doesn't offer: ask before
+   choosing another.
 8. [ADAPT] **Open the basket and check it** against the order: every item,
    size, option and quantity. Then carry on from `butler-app-checkout`
    step 7 — the checkout, your owner's approval, and placing the order all
-   follow that skill.
+   follow that skill. On Grab's checkout: delivery comes preselected as
+   **Priority** — choose Standard (Saver if your owner wants it cheapest)
+   unless they asked for the fastest; a `Review address` step may come before
+   the order button; the green bottom button becomes Place order — tap it
+   only by its label, only after approval.
+
 
 ## Idempotency and retries
 
