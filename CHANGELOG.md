@@ -1,5 +1,24 @@
 # Changelog
 
+## 1.0.2
+
+From a GrabFood run on AWS staging (2026-10-28) that lost about six minutes
+at checkout:
+
+- **Standard delivery, read from the fee.** The selected delivery card is
+  only a green border, which `screen` cannot show; the butler took nine
+  screenshots and handed it to `do` for 2.5 minutes. Each option's price is
+  on its row and the `Delivery fee` line shows the chosen one's, so that is
+  the check. Standard's tap did not take on that run — then keep Priority
+  and name it, with its fee, in the approval, rather than retry.
+- **`Review address`**: check the pin is the owner's; fill only the unit,
+  floor or driver note they gave. The run picked "Meet at lobby" itself.
+- **Never choose a driver note** for your owner (Limits).
+- **Cash or card, when Grab offers both** (owner's call, 2026-10-28): read
+  the payment row and ask the owner which, once, before the checkpoint;
+  only one offered, use it. Here rather than in `butler-app-checkout`,
+  because not every app takes both.
+
 ## 1.0.1
 
 From live Niko Neko and ZUS runs on GrabFood (2026-10-13 to 10-15):
