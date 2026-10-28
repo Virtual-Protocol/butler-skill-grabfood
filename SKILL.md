@@ -118,6 +118,10 @@ app-checkout tap --text "^DON.T ALLOW$"
    - **`Review address`** may come before the order button: check the
      pinned address is your owner's, fill only what they gave you (unit,
      floor, a driver note), and leave the rest as it is.
+   - **Payment**: read the payment row and what tapping it offers. Both
+     cash and a card: ask your owner which, once (`ask_owner`; the phone
+     waits about five minutes), unless they already said. Only one: use it.
+     Card: `butler-app-checkout`'s Paying by card. Then the checkpoint.
    - The green bottom button becomes Place order — tap it only by its
      label, only after approval.
 
