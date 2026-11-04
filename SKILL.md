@@ -33,9 +33,8 @@ Not this skill: a Grab ride (GrabCar) or GrabMart — work those from
   shop and address.
 - **Ask your owner about the order, never about the app.** What only they
   know — a unit, an instruction, a price that moved, an option that won't
-  take — ask, once; mid-errand, `app-checkout hold` first, so the phone
-  waits for the answer. How Grab's screen behaves — is a switch on, did the
-  text land — read `screen` and find out yourself; they can't see the phone.
+  take — ask, once. How Grab's screen behaves — is a switch on, did the text
+  land — read `screen` and find out yourself; they can't see the phone.
 - **Grab is not always on the phone**: `start` may land on the home screen,
   and the app installs from the provider's library in about a minute.
 - **A kept phone may already be signed in**, Grab open, your last address
