@@ -9,7 +9,9 @@ approval in 11.5 minutes, both lost the most time on Grab's address review:
   the number — all before `start`, because a mid-checkout question idled a
   phone out (owner's call: ask when unsure about the order).
 - **Ask about the order, never about the app.** Unit, instruction, a price
-  that moved: ask, once. A switch's state or whether text landed: read
+  that moved: ask, once — mid-errand after `app-checkout hold`, which keeps
+  the phone while the owner answers (virtuals-agent `feat/app-checkout-hold`,
+  bevo-server `feat/device-session-hold`). A switch's state or whether text landed: read
   `screen` — the owner can't see the phone.
 - **Review address, as it behaves:** "Not applicable" flips by the switch
   beside it, not its label; the note box is under "Add instructions to help
