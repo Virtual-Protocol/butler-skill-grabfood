@@ -1,5 +1,23 @@
 # Changelog
 
+## 1.0.3
+
+From a GrabFood run on DeepSeek 4.1 Flash, AWS staging (2026-11-04), which
+reached the approval but spent four minutes on Grab's address review (owner's
+calls, 2026-11-04):
+
+- **The driver instruction and a local phone number, asked up front.** Grab
+  won't confirm `Review address` without a delivery instruction; the run
+  tapped "Hand it to me" itself, then asked mid-checkout while the phone
+  idled. Both are now settled before `start`, in the one ask: the
+  instruction, and a local number the driver can call — the Grab account's
+  number is the butler's own +1. The number goes into the note to the driver
+  ("Call <number> on arrival") and nowhere else.
+- **Card by default.** Payment is card unless the owner asks for cash,
+  replacing 1.0.2's "ask when Grab offers both" and `butler-app-checkout`'s
+  cash-first default on Grab. A card saved in Grab is used only when the
+  owner says so; otherwise `butler-app-checkout`'s Paying by card.
+
 ## 1.0.2
 
 From a GrabFood run on AWS staging (2026-10-28) that lost about six minutes
