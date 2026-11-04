@@ -1,5 +1,24 @@
 # Changelog
 
+## 1.0.4
+
+From DeepSeek and Sonnet runs on AWS staging (2026-11-04); Sonnet reached the
+approval in 11.5 minutes, both lost the most time on Grab's address review:
+
+- **The floor or unit, or "none", asked up front** with the instruction and
+  the number — all before `start`, because a mid-checkout question idled a
+  phone out (owner's call: ask when unsure about the order).
+- **Ask about the order, never about the app.** Unit, instruction, a price
+  that moved: ask, once. A switch's state or whether text landed: read
+  `screen` — the owner can't see the phone.
+- **Review address, as it behaves:** "Not applicable" flips by the switch
+  beside it, not its label; the note box is under "Add instructions to help
+  your driver", and a `0/255` counter means the typed note didn't land;
+  Confirm does nothing until both are set. No instruction tapped "for now" —
+  both runs tapped "Hand it to me" before the owner's.
+- **Re-check delivery after the address.** Confirming it put Priority back
+  (fee 8.80 for Standard's 6.30): read the fee line and tap Standard again.
+
 ## 1.0.3
 
 From a GrabFood run on DeepSeek 4.1 Flash, AWS staging (2026-11-04), which
