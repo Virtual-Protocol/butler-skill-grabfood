@@ -1,7 +1,7 @@
 ---
 name: butler-grabfood
 description: "Order food or drinks on GrabFood in the Grab phone app: find the shop, pick a branch that is delivering, build the basket, then hand checkout to butler-app-checkout."
-version: 1.0.3
+version: 1.0.4
 metadata: {"butler":{"moneyMoving":true,"keywords":["grabfood","grab food","order on grab","grab delivery","food delivery","order food","deliver food","bubble tea","order drinks","grab menu"],"requires":{"bins":["app-checkout"],"skills":["butler-app-checkout"]}}}
 ---
 
@@ -25,10 +25,16 @@ Not this skill: a Grab ride (GrabCar) or GrabMart — work those from
 - **Settle the order first** (`butler-app-checkout` step 1): the shop, each
   item with its size and options — sugar, ice, toppings — and the quantity,
   plus the street address. For a delivery, in the same one ask: the driver
-  instruction (meet at the lobby, at the door, …) and **a local phone number
+  instruction (meet at the lobby, at the door, …), **a local phone number
   the driver can call** to hand it over — Grab's account number is your own
-  +1, which a Malaysian driver can't use. A menu question needs only the
+  +1, which a Malaysian driver can't use — and the floor or unit, or "none".
+  All of it before `start`: a question asked mid-checkout leaves the phone
+  idle, and six idle minutes release it. A menu question needs only the
   shop and address.
+- **Ask your owner about the order, never about the app.** What only they
+  know — a unit, an instruction, a price that moved, an option that won't
+  take — ask, once. How Grab's screen behaves — is a switch on, did the text
+  land — read `screen` and find out yourself; they can't see the phone.
 - **Grab is not always on the phone**: `start` may land on the home screen,
   and the app installs from the provider's library in about a minute.
 - **A kept phone may already be signed in**, Grab open, your last address
@@ -120,11 +126,18 @@ app-checkout tap --text "^DON.T ALLOW$"
      `screen` — don't screenshot to check. Still Priority's fee: Grab isn't
      offering it now; keep it, and name the option and fee in the approval.
    - **`Review address`** may come before the order button: check the
-     pinned address is your owner's and fill only what they gave you (unit,
-     floor). Grab won't confirm without a delivery instruction: pick theirs —
-     never one of your own — and put "Call <their number> on arrival" in the
-     note to the driver (no note box: `Other`, with their instruction and
-     that line). Not given yet: ask once, and wait for the answer.
+     pinned address is your owner's, then fill what they gave you. Grab
+     won't confirm without all of it:
+     - **Floor/unit**: type theirs; "none" — the switch beside "Not
+       applicable to this address" (`(icon) beside "Not applicable…"`), not
+       its label.
+     - **Delivery instruction**: theirs — never one of your own, not even
+       for now — then "Add instructions to help your driver" opens the note
+       box: type "Call <their number> on arrival", and `screen` — a `0/255`
+       counter means it didn't land; tap the box and type again.
+     - **Confirm address** does nothing while either is missing.
+     Then read the `Delivery fee` line again: confirming the address puts
+     Priority back (2026-11-04) — tap Standard once more.
    - **Payment: card, unless your owner asked for cash** (their call — this
      replaces `butler-app-checkout`'s cash-first default on Grab). Choose
      card in the payment row, then follow `butler-app-checkout`'s Paying by
