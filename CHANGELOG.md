@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.0.5
+
+- **Payment: the card gate** (butler-app-checkout 2.1.9). Grab's payment rows
+  sit just above the floating green bar; on 2026-11-05 a tap on "Cards" near
+  the bottom of the screen landed on the bar and placed a real cash order
+  (cancelled, not charged). Swipe the row into the upper half before tapping
+  it; before the approval the row must show the butler's card, never Cash;
+  never tap anything level with the bar.
+
 ## 1.0.4
 
 From DeepSeek and Sonnet runs on AWS staging (2026-11-04); Sonnet reached the

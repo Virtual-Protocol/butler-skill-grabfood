@@ -1,7 +1,7 @@
 ---
 name: butler-grabfood
 description: "Order food or drinks on GrabFood in the Grab phone app: find the shop, pick a branch that is delivering, build the basket, then hand checkout to butler-app-checkout."
-version: 1.0.4
+version: 1.0.5
 metadata: {"butler":{"moneyMoving":true,"keywords":["grabfood","grab food","order on grab","grab delivery","food delivery","order food","deliver food","bubble tea","order drinks","grab menu"],"requires":{"bins":["app-checkout"],"skills":["butler-app-checkout"]}}}
 ---
 
@@ -138,13 +138,14 @@ app-checkout tap --text "^DON.T ALLOW$"
      - **Confirm address** does nothing while either is missing.
      Then read the `Delivery fee` line again: confirming the address puts
      Priority back (2026-11-04) — tap Standard once more.
-   - **Payment: card, unless your owner asked for cash** (their call — this
-     replaces `butler-app-checkout`'s cash-first default on Grab). Choose
-     card in the payment row, then follow `butler-app-checkout`'s Paying by
-     card; a card already saved in Grab only if your owner says to use it.
-     Then the checkpoint.
+   - **Payment: the card gate** (`butler-app-checkout`'s Paying with your
+     card). The payment rows sit just above the floating green bar: a row
+     at the bottom of the screen is under it, and a tap there is Place
+     order (a "Cards" tap placed a real order, 2026-11-05) — `swipe up`
+     until the row is in the upper half, then tap it by text. Before the
+     approval the row must read your card ("Visa ••••1234"), never Cash.
    - The green bottom button becomes Place order — tap it only by its
-     label, only after approval.
+     label, only after approval, and never anything level with it.
 
 
 ## Idempotency and retries
