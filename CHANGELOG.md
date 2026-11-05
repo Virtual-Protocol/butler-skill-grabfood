@@ -2,6 +2,12 @@
 
 ## 1.0.5
 
+- **The default for food delivery** (with butler-app-checkout 2.1.9). On
+  staging (2026-11-05) "order iced matcha from Luckin" went to the Luckin
+  app instead of Grab: this skill only claimed requests that said Grab.
+  Now any delivery with no app named starts here — description, "When to
+  use" and keywords say so; the shop's own app only when the owner names
+  it, wants pickup, or Grab doesn't have the shop (offered, not switched to).
 - **Payment: the card gate** (butler-app-checkout 2.1.9). Grab's payment rows
   sit just above the floating green bar; on 2026-11-05 a tap on "Cards" near
   the bottom of the screen landed on the bar and placed a real cash order

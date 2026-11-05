@@ -1,15 +1,19 @@
 ---
 name: butler-grabfood
-description: "Order food or drinks on GrabFood in the Grab phone app: find the shop, pick a branch that is delivering, build the basket, then hand checkout to butler-app-checkout."
+description: "Order food or drinks delivered from any shop or chain on GrabFood, the default when no app is named: find a delivering branch, build the basket, then hand checkout to butler-app-checkout."
 version: 1.0.5
-metadata: {"butler":{"moneyMoving":true,"keywords":["grabfood","grab food","order on grab","grab delivery","food delivery","order food","deliver food","bubble tea","order drinks","grab menu"],"requires":{"bins":["app-checkout"],"skills":["butler-app-checkout"]}}}
+metadata: {"butler":{"moneyMoving":true,"keywords":["grabfood","grab food","order on grab","grab delivery","food delivery","order food","deliver food","bubble tea","order drinks","grab menu","coffee","drinks","deliver to","delivered","takeaway"],"requires":{"bins":["app-checkout"],"skills":["butler-app-checkout"]}}}
 ---
 
 ## When to use
 
-Your owner wants food or drinks from GrabFood, or wants to see a GrabFood menu:
-"order KOI from GrabFood", "what's on the Tealive menu on Grab?", "get me
-chicken rice on Grab to the office".
+Your owner wants food or drinks delivered, or a menu to look at — from
+GrabFood, or from any shop or chain when no other app is named: "order KOI
+from GrabFood", "iced matcha from Luckin", "get me chicken rice to the
+office", "what's on the Tealive menu?". Grab carries most chains, so this is
+the default for a delivery: search the shop on Grab first. The shop's own
+app (`butler-app-checkout` alone) only when your owner names that app or
+wants pickup, or Grab doesn't have the shop.
 
 This skill is the Grab part only. `butler-app-checkout` owns everything
 else: the phone, signing in, the checkout, your owner's approval and placing
@@ -162,7 +166,7 @@ app-checkout tap --text "^DON.T ALLOW$"
 | What happened | What to do |
 | --- | --- |
 | No branch is delivering | Say so, with the nearest branch's state; offer to try later. `end` the phone. |
-| The shop isn't on GrabFood | Say so; don't substitute another shop unasked. |
+| The shop isn't on GrabFood | Say so; don't substitute another shop unasked. Offer the shop's own app — `end` this phone first; a new `start` with that app once your owner agrees. |
 | An item or option is sold out | Ask your owner for a swap before adding anything else. |
 | The basket total jumps (surge, small-order fee) | That is part of the final total `butler-app-checkout` reads before the approval — never hide it. |
 | Sign-in fails | Follow `butler-app-checkout`'s failure handling: `end`, and say you couldn't get in. |
